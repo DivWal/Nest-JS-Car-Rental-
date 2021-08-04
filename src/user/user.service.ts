@@ -1,20 +1,17 @@
 import { Injectable ,HttpException} from '@nestjs/common';
 import {Model} from 'mongoose';
 import {InjectModel} from '@nestjs/mongoose';
-import {IUser} from './interfaces/user.interface'
-import {UserDto} from './user.dto'
+import {IUser} from '../interfaces/user.interface'
+import {UserDto} from '../dtos/user.dto'
 
 
 @Injectable()
 export class UserService {
-    
-    // private cars=CARS; //mock data test
 
-    constructor(@InjectModel('Users') private readonly userModel: Model<IUser>) {}
+    constructor(@InjectModel('User') private readonly userModel: Model<IUser>) {}
 
     public getUsers(){ 
-            const cars=this.userModel.find().exec();
-            return cars;
+            return this.userModel.find().exec();
     }
 
     public async postUsers(user){
@@ -24,44 +21,42 @@ export class UserService {
 s
 
     public  async deleteUser(id:number):Promise<any>{
-        const cardId=Number(id);
-        const car = await this.userModel.deleteOne({ cardId }).exec();
-        if (car.deletedCount === 0) {
+        const user = await this.userModel.deleteOne({ id }).exec();
+        if (user.deletedCount === 0) {
           throw new HttpException('Not found',404);
        }
-       return car;
+       return user;
     }
 
     public  async getUserbyId(id:number):Promise<any>{
-       const cardId=Number(id);
-       const cars=this.userModel.find({cardId}).exec();
-       if(!cars){
+       const user=this.userModel.find({id}).exec();
+       if(!user){
           throw new HttpException('Not found',404);
        }
        else
-       return cars;
+       return user;
     }
 
     public  async updateUserById(id:number,property_name:string,property_value:string):Promise<any>{
         
-        const cardId=Number(id);
         const propertyName=String(property_name);
         const propertyValue=String(property_value);
-        const car = await this.userModel.findOneAndUpdate({ cardId },{[propertyName]: propertyValue,}) .exec();
-         if (!car) {
+        const user = await this.userModel.findOneAndUpdate({ id },{[propertyName]: propertyValue,}) .exec();
+         if (!user) {
         throw new HttpException('Not Found', 404);
       }
-      return car;
+      return user;
        
 }
+   
 
-    public async getListofUsers(id: number): Promise<any> {
-        const cardId = Number(id);
-        const cars=this.userModel.find({cardId}).exec();
-        if (!cars) {
-            throw new HttpException('Not Found', 404);
-        }
-        return cars;
+    // public async getListofUsers(id: string): Promise<any> {
+    //     const cardId = String(id);
+    //     const cars=this.userModel.find({cardId}).exec();
+    //     if (!cars) {
+    //         throw new HttpException('Not Found', 404);
+    //     }
+    //     return cars;
 
-    }
+    // }
 }

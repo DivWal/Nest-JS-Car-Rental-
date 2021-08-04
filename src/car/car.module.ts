@@ -2,14 +2,19 @@ import { Module } from '@nestjs/common';
 import {MongooseModule} from '@nestjs/mongoose';
 import { CarController } from './car.controller';
 import { CarService } from './car.service';
-import {CarSchema} from './schemas/car.schema'
+import {CarsSchema} from '../schemas/car.schema'
+import {RentalSchema} from '../schemas/rental.schema'
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
         name: 'Car',
-        schema: CarSchema,
+        schema: CarsSchema,
+      },
+      {
+        name: 'Rental',
+        schema:RentalSchema,
       },
     ]),
   ],

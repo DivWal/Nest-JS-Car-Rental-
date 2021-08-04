@@ -13,9 +13,14 @@ export class CalculatePriceController {
 
     */
 
-    @Get(':toDateTime/:fromDateTime/:cardId')
-    public  getPrice(@Param('toDateTime') toDateTime:Date,@Param('fromDateTime') fromDateTime:Date,@Param('cardId') cardId:string){
-        return this.calculatePrice.getPrice(toDateTime,fromDateTime,cardId);
+    @Get()
+    public (){
+        
+    }
+
+    @Get(':toDateTime/:fromDateTime/:carLicenseNumber')
+    public  getPrice(@Param('toDateTime') toDateTime:Date,@Param('fromDateTime') fromDateTime:Date,@Param('carLicenseNumber') carLicenseNumber:string){
+        return this.calculatePrice.getPrice(toDateTime,fromDateTime,carLicenseNumber);
     }
 
 }

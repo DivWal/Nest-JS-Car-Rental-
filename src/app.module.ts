@@ -8,7 +8,9 @@ import { CalculatePriceModule } from './calculate-price/calculate-price.module';
 // contain implementation of application  :Car Rental Systems
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/car_manager'),
+    MongooseModule.forRoot('mongodb://localhost/carsSchema_manager'),
+    MongooseModule.forRoot('mongodb://localhost/rental_schema_manager'),
+    MongooseModule.forRoot('mongodb://localhost/users_manager'),
     CarModule,
     UserModule,
     SearchCarsModule,

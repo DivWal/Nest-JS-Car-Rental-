@@ -1,21 +1,18 @@
 import { Controller,Get, Post,Delete,Put,Body, Param,Query } from '@nestjs/common';
 import {CarService} from './car.service';
-import {UserService} from '../user/user.service';
-import {CarDto} from './car.dto';   
+import {CarDto} from '../dtos/car.dto';   
 
 @Controller('cars') // base url after localHost
 export class CarController {
     constructor(
-        private userService: UserService,
         private carService: CarService,
         ){}
     // end point methods  
-    /* how data to be sent over the network  dto files define
+    /* how data to be sent over the network  defined by dto files
 
-    */
+
    /*
    Implemented CRUD operations 
-
    */
 
    @Get()
@@ -30,7 +27,7 @@ export class CarController {
 
     @Delete(':carLicenseNumber')
     public  deleteCars(@Param('carLicenseNumber') carLicenseNumber:string){
-        return  this.carService.deleteCars(carLicenseNumber);;
+        return this.carService.deleteCars(carLicenseNumber);;
     }
 
     @Get(':carLicenseNumber')
@@ -51,11 +48,9 @@ export class CarController {
         const property_value=query.property_value;
         return this.carService.updateCarById(carLicenseNumber,property_name,property_value);
     }
-
-    @Get('/car/bookings')
-    public  getListofUsers(@Param('carLicenseNumber') carLicenseNumber:string){
-        return this.userService.getListofUsers(carLicenseNumber);
+    @Get('bookings/:carLicenseNumber')
+    public  getAllCarsBookedbyUser(@Param('carLicenseNumber') carLicenseNumber:string){
+        return this.carService.getAllCarsBookedbyUser(carLicenseNumber);
     }
-
 
 }

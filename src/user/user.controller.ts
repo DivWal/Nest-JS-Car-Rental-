@@ -1,14 +1,14 @@
 import { Controller,Get, Post,Delete,Put,Body, Param,Query } from '@nestjs/common';
 import {UserService} from './user.service';
-import {CarService} from '../car/car.service';
-import {UserDto} from './user.dto'; 
+// import {CarService} from '../car/car.service';
+import {UserDto} from '../dtos/user.dto'; 
 
 @Controller('user') // base url after localHost
 export class UserController {
 
     constructor(
         private userService: UserService,
-        private carService: CarService,
+        // private carService: CarService,
         ){}
 
     // end point methods  
@@ -46,10 +46,7 @@ export class UserController {
         return this.userService.updateUserById(id,property_name,property_value);
     }
 
-    @Get('bookings/:id')
-    public  getAllCarsBookedbyUser(@Param('id') id:number){
-        return this.carService.getAllCarsBookedbyUser(id);
-    }
+   
     
 
    
