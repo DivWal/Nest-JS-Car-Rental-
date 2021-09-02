@@ -10,6 +10,8 @@ export const CarsSchema=new mongoose.Schema({
     dateTimeFrom:{ type: Date, required: true }, 
     dateTimeto:{ type: Date, required: true },
     isBooked: {type: Boolean, required: true, default: false}
+
+    // adding comment
 })
 
 
